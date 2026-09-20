@@ -1,0 +1,41 @@
+DuplicateGuard 2.1.1 — Reload and Lifecycle Fix
+================================================
+
+Fixed in 2.1.1
+--------------
+- Removed the English-language startup reload loop.
+- English and Arabic now switch in place without refreshing the page.
+- Added a global Exit DuplicateGuard button in the top toolbar.
+- Added a persistent Windows notification-area icon.
+- Left-clicking the icon reopens the dashboard.
+- Right-clicking the icon provides Open, Open recovery folder, and Exit actions
+  in English and Arabic.
+- Added support for DuplicateGuard.exe --exit.
+- Added an Exit DuplicateGuard Start Menu shortcut.
+- Setup now closes a running DuplicateGuard before replacing application files.
+- Setup first requests a graceful shutdown, waits for state to be saved, and
+  uses taskkill only as a fallback for older or unresponsive builds.
+- Uninstall removes both normal and Exit shortcuts.
+
+Safety engine
+-------------
+The duplicate detection, SHA-256 revalidation, retained-copy protection,
+quarantine, restoration, cloud protection, and retention controls are unchanged
+from the hardened 2.1.0 engine.
+
+Validation performed
+--------------------
+- go test ./...
+- go vet ./...
+- Windows amd64 vet and compile validation
+- Windows GUI PE32+ application and installer validation
+- Dashboard JavaScript syntax validation with Node.js
+- Regression test confirming location.reload is absent
+- Regression test confirming English restoration, RTL switching hooks, global
+  Exit control, and current version metadata
+- Embedded installer payload SHA-256 equality check
+
+Deployment note
+---------------
+The binaries are not Authenticode-signed. Windows SmartScreen may show
+Unknown publisher. Verify the SHA-256 checksums included with the release.

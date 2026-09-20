@@ -1,0 +1,6 @@
+dist/
+installer/payload/
+*.exe
+*.log
+.DS_Store
+Thumbs.db
